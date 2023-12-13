@@ -78,8 +78,12 @@ class MEPO():
             'until': nowiso,
             'limit': str(args.limit)
         }
-
-        res = self.session.get('https://{0}/eventservice/api/v2/events'.format(self.base), params=params)
+        
+        # Ignore certificate
+        if args.ignore == 'N':
+            res = self.session.get('https://{0}/eventservice/api/v2/events'.format(self.base), params=params)
+        else:
+            res = self.session.get('https://{0}/eventservice/api/v2/events'.format(self.base), params=params, verify=False)
 
         if res.ok:
             self.logger.info('Successfully retrieved MVISION EPO Events.')
@@ -134,6 +138,10 @@ if __name__ == '__main__':
                         type=int, help='Maximum Events to retrieve')
 
     parser.add_argument('--file', '-F', required=False,
+                        type=str, default='N', choices=['Y', 'N'],
+                        help='Write output to file')
+    
+    parser.add_argument('--ignore', '-I', required=False,
                         type=str, default='N', choices=['Y', 'N'],
                         help='Write output to file')
 
