@@ -20,6 +20,8 @@ optional arguments:
                         Maximum Events to retrieve
   --file {Y,N}, -F {Y,N}
                         Write output to file
+  --ignore {Y,N}, -I {Y,N}
+                        Ignore certificate to endpoint(**Not recommended)
 ```
 
 Other scopes can be defined. Examples:
